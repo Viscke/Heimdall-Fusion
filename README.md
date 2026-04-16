@@ -1,36 +1,31 @@
-Heimdall Fusion é um framework monolítico de auditoria de segurança projetado para simular o ciclo de vida completo de um ataque cibernético avançado (APT). Ele atua como um "Observador Absoluto", capaz de romper parâmetros físicos sem fio (Wi-Fi), pivotar para a rede interna e orquestrar um reconhecimento profundo desde a camada de enlace (L2) até a camada de aplicação (L7).
-Desenvolvido com foco em alta performance e evasão, o Heimdall otimiza o hardware do hospedeiro (I/O via RAM Disk e paralelismo extremo) para realizar testes de estresse, mapeamento de Active Directory e varredura de vulnerabilidades (CVEs), entregando as evidências em um cofre criptografado.
-
-Principais funções:
-
-Infiltração de Perímetro (Wireless)
-WPA2/WPA3 Quick Crack: Captura autônoma de PMKID e Handshakes com tentativa de quebra offline em tempo hábil.
-WPS Pixie-Dust: Exploração de falhas estruturais em roteadores legados.
-Captive Portal Sequestration (Evil Twin): Clonagem de AP, sequestro de DNS (Dnsmasq) e engenharia social via servidor HTTP interativo para captura de PSK.
-
-Evasão e Stealth Operacional
-MAC Spoofing Global: Camuflagem de identidade em todas as interfaces de rede.
-Volatilidade (Disco RAM): Execução de I/O massiva em /dev/shm (Memória RAM), não deixando artefatos no disco rígido do hospedeiro.
-Nmap Idle Scan (Zombie Host): Mapeamento de rede utilizando máquinas ociosas como "laranjas" para roubar sistemas de IDS/IPS corporativos.
-
-Reconhecimento Massivo e Interrogação (L3-L7)
-Descoberta Híbrida: Integração de Masscan e Zmap para varredura de portas em altíssima velocidade.
-Ondas Curtas e IPv6: Escuta passiva de dispositivos Bluetooth Low Energy (BLE) e descoberta de hosts via IPv6 Multicast (Ping ff02::1).
-Mapeamento do Active Directory: Enumeração automática de compartilhamentos SMB e remoção de topologia para o BloodHound via NetExec.
-Web Fuzzing & Visual Recon: Captura de telas de painéis administrativos (gowitness) e descoberta de diretórios/chaves na nuvem (ffuf).
-
-Motor de Vulnerabilidades & C2
-Next-Gen Scanner: Integração com Núcleos para detecção de CVEs, painéis expostos e falhas de configuração.
-Out-of-Band (OOB): Validação de falhas cegas (Blind RCE/SSRF) utilizando interações via Interactsh.
-Telemetria (C2): Alertas em tempo real enviados via Telegram em caso de descoberta de vulnerabilidades críticas.
-
-Retenção de Evidências Corporativas
-Data Lake Local: Compilação dos resultados em um banco de dados SQLite estruturado, ideal para entrada em plataformas de Zero Trust e Firewalls.
-Selo Criptográfico: Todos os arquivos de configuração, credenciais (tshark), capturas de rede (tcpdump) e relatórios são compactados e criptografados no padrão AES-256-CBC.
-
-Arquitetura e Desempenho
-O Heimdall foi arquitetado como um roteiro monolítico, eliminando atritos de implantação. Ele ajusta dinamicamente as configurações do Kernel Linux (sysctl) para suportar altíssima concorrência (problema C10k) e evitar a exaustão de portas TCP e limite de arquivos abertos, garantindo que o hardware seja utilizado em seu limite sem causar Kernel Panic.
-
-Aviso Legal (Isenção de Responsabilidade)
-Este projeto foi desenvolvido exclusivamente para fins de auditoria profissional autorizada. O uso desta ferramenta em redes, sistemas ou infraestruturas que você não possui, ou sem consentimento explícito e por escrito dos proprietários, é proibido e ilegal. O desenvolvedor não assume nenhuma responsabilidade pelo uso indevido deste software.
-Construído para não deixar pontos cegos.
+​👁️ HEIMDALL FUSION
+​Automated Red Team & Infrastructure Auditing Framework (L1 to L7)
+​🔒 SECURITY NOTICE / OPSEC: > Por questões de Segurança Operacional (OpSec) e responsabilidade ética, o código-fonte do Heimdall Fusion é estritamente mantido em um repositório privado. O framework possui capacidades ofensivas automatizadas de alto impacto estrutural (englobando do rompimento de perímetros L1/L2 à exfiltração de domínio L7). Este repositório serve exclusivamente como documentação arquitetônica da ferramenta e vitrine de engenharia de segurança corporativa. O código não será disponibilizado publicamente.
+​📌 Visão Geral
+​Heimdall Fusion é um framework monolítico de auditoria de segurança projetado para simular o kill-chain completo de uma Ameaça Persistente Avançada (APT). Desenvolvido para atuar como um "Observador Absoluto", o motor automatiza o rompimento do perímetro físico sem fio (Wi-Fi), pivota de forma silenciosa para a rede interna e orquestra um reconhecimento profundo, interligando dezenas de ferramentas do ecossistema de Red Team de forma assíncrona.
+​O projeto foca em alta performance, evasão de IDS/IPS e otimização de hardware, utilizando alocação dinâmica de RAM e paralelismo extremo para entregar inteligência estruturada diretamente para equipes de Blue Team e arquitetos de Zero Trust.
+​🚀 Capacidades Táticas (Kill-Chain Automatizado)
+​1. Infiltração de Perímetro (Wireless Breach)
+​A fase de entrada utiliza uma lógica de escalonamento em cascata para comprometer redes Wi-Fi locais:
+​WPA2/WPA3 Quick Crack: Captura autônoma de PMKID e Handshakes (via hcxdumptool e airodump-ng), com tentativa de força bruta offline em janela de tempo estrita.
+​WPS Pixie-Dust: Escalonamento automático para exploração de falhas estruturais no protocolo WPS (via bully/wash).
+​Evil Twin & Captive Portal: Sequestro de tráfego L2, implementação de DNS Spoofing (dnsmasq) e engenharia social via servidor HTTP interativo em Python para captura de credenciais em texto claro.
+​2. Evasão e Stealth Operacional (Invisibility)
+​Volatilidade (RAM Disk): Execução de I/O massivo isolado em /dev/shm. Nenhum artefato é gravado no disco físico do hospedeiro durante a operação.
+​MAC Spoofing Global: Alteração dinâmica de endereços físicos para camuflagem completa.
+​Zombies & Idle Scans: Mapeamento tático da rede utilizando máquinas ociosas (impressoras, servidores legados) como vetores de reflexão, ocultando a origem do atacante contra firewalls internos.
+​Escuta Passiva (Shadowing): Extração de senhas em tráfego limpo (tshark), gravação de pacotes (tcpdump) e fingerprinting de SO silencioso (p0f).
+​3. Reconhecimento Profundo (L3-L7 Interrogation)
+​Varredura Massiva e Concorrente: Integração híbrida de Masscan e Nmap (saturando threads do processador) para varredura de infraestrutura em velocidade Gigabit.
+​Active Directory Domination: Enumeração automatizada de compartilhamentos SMB e extração de topologia JSON para ingestão no BloodHound (via NetExec).
+​Visual Recon & Fuzzing Web: Screenshots automáticos de todas as interfaces web (gowitness) e descoberta agressiva de rotas e segredos em nuvem expostos (ffuf).
+​4. Motor Next-Gen & C2 (Command & Control)
+​Vulnerability Engine: Validação de Blind SSRF/RCE (Out-of-Band) e descoberta de CVEs utilizando o motor Nuclei.
+​Telemetria via Telegram: Alertas despachados em tempo real via API do Telegram em caso de descoberta de vulnerabilidades críticas ([critical]) ou sucesso na infiltração de perímetro.
+​🔐 Retenção de Evidências
+​Ao final da operação, a fase de purga é acionada:
+​Data Lake (SQLite): Os resultados brutos da rede são compilados em um banco de dados relacional para facilitar consultas de engenharia de firewall (microssegmentação/Illumio).
+​Selo Criptográfico: Todas as evidências (PCAPs, screenshots, credenciais e logs) são compactadas e cifradas utilizando criptografia militar AES-256-CBC.
+​Autodestruição: O RAM Disk é obliterado, os processos são expurgados e o hardware é devolvido ao estado original sem rastros.
+​⚠️ Disclaimer Ético e Legal
+​Este framework foi concebido, arquitetado e desenvolvido exclusivamente para fins educacionais e de auditoria profissional autorizada em infraestruturas corporativas próprias. O uso destas técnicas ou lógicas em redes, sistemas ou infraestruturas sem o consentimento explícito e por escrito dos proprietários é estritamente ilegal. O autor repudia qualquer uso malicioso desta arquitetura e não assume qualquer responsabilidade pelas ações de terceiros inspiradas por esta documentação.
